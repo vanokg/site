@@ -1,108 +1,137 @@
-@import "compass";
-*, *::after, *::before{
-  @include box-sizing(border-box);
-}
-
-html{
-  background: #000;
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-}
-head{
-  display: block;
-  position: relative;
-  width: 200px;
-  margin: 10% auto 0;
-  @include animation(shvr .2s infinite);
-  
-  &::after{
-  content: '';
-  width: 20px;
-  height: 20px;
-  background: #000;
-  position: absolute;
-  top: 30px;
-  left: 25px;
-  @include border-radius(50%);
-  @include box-shadow(125px 0 0 #000);
-  @include animation(eye 2.5s infinite)
-  
-}
-}
-meta{
-  position: relative;
-  display: inline-block;
-  background: #fff;
-  width: 75px;
-  height: 80px;
-  @include border-radius(50% 50% 50% 50% / 45px 45px 45% 45%); 
-  @include rotate(45deg);
-  
-  &::after{
-    content: '';
-    position: absolute;
-    border-bottom: 2px solid #fff;
-    width: 70px;
-    height: 50px;
-    left:0px;
-    bottom: -10px;
-    @include border-radius(50%);
-  }
-  
-  &::before{
-    bottom: auto;
-    top: -100px;
-    @include rotate(45deg);
-    left: 0;
-  }
-  
- &:nth-of-type(2){
-    float: right;
-    @include rotate(-45deg);
-    &::after{ left:5px; }
-  }
-  
-  &:nth-of-type(3){
-    display: none;
-  }
-  
-}
-
-body{
-  margin-top: 100px;
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Catamaran:400,800');
+.error-container {
   text-align: center;
-  color: #fff;
-  &::before{
-    content: '404';
-    font-size: 80px;
-    font-weight: 800;
-    display: block;
-    margin-bottom: 10px;
+  font-size: 180px;
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 800;
+  margin: 20px 15px;
+}
+.error-container > span {
+  display: inline-block;
+  line-height: 0.7;
+  position: relative;
+  color: #FFB485;
+}
+.error-container > span > span {
+  display: inline-block;
+  position: relative;
+}
+.error-container > span:nth-of-type(1) {
+  perspective: 1000px;
+  perspective-origin: 500% 50%;
+  color: #F0E395;
+}
+.error-container > span:nth-of-type(1) > span {
+  transform-origin: 50% 100% 0px;
+  transform: rotateX(0);
+  animation: easyoutelastic 8s infinite;
+}
+
+.error-container > span:nth-of-type(3) {
+  perspective: none;
+  perspective-origin: 50% 50%;
+  color: #D15C95;
+}
+.error-container > span:nth-of-type(3) > span {
+  transform-origin: 100% 100% 0px;
+  transform: rotate(0deg);
+  animation: rotatedrop 8s infinite;
+}
+@keyframes easyoutelastic {
+  0% {
+    transform: rotateX(0);
   }
-  &::after{
-    content: 'Got lost? How.....?  why.....?  Ahhhh....';
-    color: #1EA7AB;
-    width: 120px;
-    font-size: 30px;
-    overflow: hidden;
+  9% {
+    transform: rotateX(210deg);
+  }
+  13% {
+    transform: rotateX(150deg);
+  }
+  16% {
+    transform: rotateX(200deg);
+  }
+  18% {
+    transform: rotateX(170deg);
+  }
+  20% {
+    transform: rotateX(180deg);
+  }
+  60% {
+    transform: rotateX(180deg);
+  }
+  80% {
+    transform: rotateX(0);
+  }
+  100% {
+    transform: rotateX(0);
+  }
+}
+
+@keyframes rotatedrop {
+  0% {
+    transform: rotate(0);
+  }
+  10% {
+    transform: rotate(30deg);
+  }
+  15% {
+    transform: rotate(90deg);
+  }
+  70% {
+    transform: rotate(90deg);
+  }
+  80% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotateX(0);
+  }
+}
+    
+
+
+
+
+/* demo stuff */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+  background-color: #f4f4f4;
+  margin-bottom: 50px;
+}
+html, button, input, select, textarea {
+    font-family: 'Montserrat', Helvetica, sans-serif;
+    color: #bbb;
+}
+h1 {
+  text-align: center;
+  margin: 30px 15px;
+}
+.zoom-area { 
+  max-width: 490px;
+  margin: 30px auto 30px;
+  font-size: 19px;
+  text-align: center;
+}
+.link-container {
+  text-align: center;
+}
+a.more-link {
+  text-transform: uppercase;
+  font-size: 13px;
+    background-color: #bbb;
+    padding: 10px 15px;
+    border-radius: 0;
+    color: #fff;
     display: inline-block;
-    white-space: nowrap;
-    @include animation(text-show 2s infinite steps(3));
-  }
-}
-
-@include keyframes(eye){
-  0% ,30% , 55%, 90% , 100%{ @include translate(0 , 0) }
-  10%, 25%{ @include translate( 0 , 20px) }
-  65%{ @include translate(-20px, 0) }
-  80%{ @include translate(20px, 0) }
-}
-
-@include keyframes(shvr){
-  0%{ @include translate(1px) }
-  50%{ @include translate(0) }
-  100%{ @include translate(-1px) }
-}
-
-@include keyframes(text-show){
-to{text-indent: -373px;}
+    margin-right: 5px;
+    margin-bottom: 5px;
+    line-height: 1.5;
+    text-decoration: none;
+  margin-top: 50px;
+  letter-spacing: 1px;
 }
